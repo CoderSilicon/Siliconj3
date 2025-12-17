@@ -1,18 +1,20 @@
 "use client";
-import { use, useEffect } from "react";
+import { use } from "react";
 import { PeriodicData } from "@/data/elementData";
 import { CATEGORY_COLORS } from "@/data/elemnts";
 
-export default function elementBrief({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = use(params);
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default function elementBrief({ params }: PageProps) {
+ ;
   const element = PeriodicData.find((el) => {
     return (
-      el.id.toString() === slug ||
-      el.symbol.toLowerCase() === slug.toLowerCase()
+      el.id.toString() === params.slug ||
+      el.symbol.toLowerCase() === params.slug.toLowerCase()
     );
   })!;
   const getCategoryColor = (category: string) => {
