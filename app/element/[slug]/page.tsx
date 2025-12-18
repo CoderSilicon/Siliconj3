@@ -1,29 +1,28 @@
 "use client";
-import { use } from "react";
 import { PeriodicData } from "@/data/elementData";
 import { CATEGORY_COLORS } from "@/data/elemnts";
 
 interface PageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
-export default function elementBrief({ params }: PageProps) {
- ;
+export default async function elementBrief({ params }: PageProps) {
+  const slug = await params.slug;
   const element = PeriodicData.find((el) => {
     return (
-      el.id.toString() === params.slug ||
-      el.symbol.toLowerCase() === params.slug.toLowerCase()
+      el.id.toString() === slug ||
+      el.symbol.toLowerCase() === slug.toLowerCase()
     );
   })!;
   const getCategoryColor = (category: string) => {
     let modifiedCategory = category.toLowerCase().replace(/\s+/g, "-");
     return (
-      CATEGORY_COLORS[modifiedCategory as keyof typeof CATEGORY_COLORS] || "bg-gray-700"
+      CATEGORY_COLORS[modifiedCategory as keyof typeof CATEGORY_COLORS] ||
+      "bg-gray-700"
     );
   };
-
 
   return (
     <div
