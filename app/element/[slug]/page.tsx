@@ -1,15 +1,12 @@
-"use client";
 import { PeriodicData } from "@/data/elementData";
 import { CATEGORY_COLORS } from "@/data/elemnts";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function elementBrief({ params }: PageProps) {
-  const slug = await params.slug;
+export default async function elementBrief({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = await params;
   const element = PeriodicData.find((el) => {
     return (
       el.id.toString() === slug ||
